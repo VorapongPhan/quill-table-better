@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Test ESM Build</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css"
+    />
+    <link rel="stylesheet" href="./dist/quill-table-better.css" />
+  </head>
+  <body>
+    <div id="editor"></div>
+
+    <script type="module">
+      // Test ES Module import
+      import Quill from "https://cdn.jsdelivr.net/npm/quill@2/+esm";
+      import QuillTableBetter from "./dist/quill-table-better.esm.js";
+
+      console.log("Quill:", Quill);
+      console.log("QuillTableBetter:", QuillTableBetter);
+
+      // Test if Quill.import works correctly
+      Quill.register("modules/table-better", QuillTableBetter);
+
+      const quill = new Quill("#editor", {
+        theme: "snow",
+        modules: {
+          "table-better": {},
+        },
+      });
+
+      console.log("Quill instance created successfully");
+    </script>
+  </body>
+</html>

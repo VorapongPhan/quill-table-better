@@ -3,10 +3,40 @@
   "version": "1.2.4",
   "description": "A module that enhances the table functionality of Quill",
   "main": "dist/quill-table-better.js",
+  "module": "dist/quill-table-better.esm.mjs",
   "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/quill-table-better.esm.mjs",
+      "require": "./dist/quill-table-better.js",
+      "default": "./dist/quill-table-better.js"
+    },
+    "./formats": {
+      "types": "./dist/formats/index.d.ts",
+      "import": "./formats/index.mjs"
+    },
+    "./formats/header": {
+      "types": "./dist/formats/header.d.ts",
+      "import": "./formats/header.mjs"
+    },
+    "./formats/list": {
+      "types": "./dist/formats/list.d.ts",
+      "import": "./formats/list.mjs"
+    },
+    "./formats/table": {
+      "types": "./dist/formats/table.d.ts",
+      "import": "./formats/table.mjs"
+    },
+    "./dist/quill-table-better.css": "./dist/quill-table-better.css",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.js",
-    "build": "webpack --config config/webpack.prod.js && rm dist/quill-table-better",
+    "build:clean": "rm -rf dist/*.js dist/*.css",
+    "build:webpack": "webpack --config config/webpack.prod.js",
+    "build:cleanup": "rm -f dist/quill-table-better",
+    "build": "npm run build:clean && npm run build:webpack && npm run build:cleanup",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
